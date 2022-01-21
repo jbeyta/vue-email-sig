@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TCCU Email Signatures</title>
+	<link rel="stylesheet" type="text/css" href="dist/css/main.css?v=012220201120">
+</head>
+
+<body>
+	<div id="sigmaker" role="main">
+		<div class="instuctions">
+			<div class="row">
+				<div class="s12">
+					<h1>Step 1:</h1>
+					<p style="margin: 10px 0;">Fill in the fields below. (location is required)</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="s12 controls">
+				<div class="input-mother">
+					<label>Location (required)</label>
+					<select v-model="which_office" v-on:change="swapAddress">
+						<option value="">Select a Location</option>
+						<option value="downtown">Downtown Branch</option>
+						<option value="southwest">Southwest Parkway Branch</option>
+						<option value="sheppard">Sheppard Access Road Branch</option>
+					</select>
+				</div>
+
+				<div class="input-mother">
+					<label>Full Name</label>
+					<input v-model="name" type="text" />
+				</div>
+
+				<div class="input-mother">
+					<label>Title</label>
+					<input v-model="title" type="text" />
+				</div>
+
+				<div class="input-mother">
+					<label>Email</label>
+					<input v-model="email" type="text" />
+				</div>
+			</div>
+
+			<div class="s12 controls">
+				<div class="input-mother">
+					<label>Cell Phone (optional)</label>
+					<input v-model="cell_phone" type="text" />
+				</div>
+
+				<div class="input-mother">
+					<label>Direct Phone</label>
+					<input v-model="direct_phone" type="text" maxlength="14" />
+				</div>
+				
+				<div class="input-mother">
+					<label>NMLS</label> 
+					<input v-model="nmls" type="text" />
+				</div>
+				
+				<div class="input-mother">
+					<label>TCCU NMLS</label>
+					<input v-model="tccunmls" type="text" />
+				</div>
+								
+				<div class="input-mother stack">
+					<div class="toggle">
+						<input id="showoffice" v-model="show_office_phone" type="checkbox" />
+						<label for="showoffice">Show Office Number</label>
+					</div>
+
+					<div class="toggle">
+						<input id="showfax" v-model="show_fax" type="checkbox" />
+						<label for="showfax">Show Fax Number</label>
+					</div>
+				</div>
+
+				<div class="input-mother">
+					<label>&nbsp;</label>
+					<button v-on:click="reset()">Reset</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="instuctions">
+			<div class="row">
+				<div class="s12">
+					<h1>Step 2:</h1>
+					<p style="margin: 10px 0;"><button class="button" v-on:click="selectCopy"><b>Click here to copy the signature below</b></button> and then paste it into your signature in your email client.</p>
+					<!-- <p style="margin: 10px 0;">If something isn't working right, select the code in the block on the right and paste it as the HTML for your signature in your email client.</p> -->
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div v-if="which_office" v-bind:class="{'s12 m6 esig-preview': true, 'copied': copied}" v-cloak>
+				<table class="rendered esig-mother">
+					<tbody>
+						<tr>
+							<td style="padding-right: 15px; border-right: solid 1px #7a1316; text-align: center; width: 200px;" width="200">
+								<a style="display: inline-block; text-decoration: none;" href="https://texomacu.com/">
+									<img v-bind:src="domain+'dist/esig-logo-8.png'" alt="Texoma Community Credit Union"
+										style="display: block; width: 166px; height: 60px; margin-bottom: 15px;" width="166" height="60" />
+								</a>
+
+								<p style="font-family: Helvetica, Arial, sans-serif; color: #313131; margin: 0 0 15px; font-size: 12px; white-space: nowrap; text-align: center;">
+									<a style="display: inline-block; text-decoration: none;" href="https://www.facebook.com/texomacu/">
+										<img v-bind:src="domain+'dist/fb-8.png'" alt="Facebook | Texoma Community Credit Union"
+											style="display: block; width: 25px; height: 25px;" width="25" height="25" />
+									</a>
+								
+									<a style="display: inline-block; text-decoration: none;" href="https://texomacu.com/">
+										<img v-bind:src="domain+'dist/t-icon-8.png'" alt="TCCU" style="display: block; width: 25px; height: 25px;"
+											width="25" height="25" />
+									</a>
+								
+									<a style="display: inline-block; text-decoration: none;" href="https://www.instagram.com/texomacu/">
+										<img v-bind:src="domain+'dist/ig-8.png'" alt="Instagram | Texoma Community Credit Union"
+											style="display: block; width: 25px; height: 25px;" width="25" height="25" />
+									</a>
+								</p>
+								
+								<p style="font-family: Helvetica, Arial, sans-serif; color: #313131; margin: 0; font-size: 12px; white-space: nowrap; text-align: center;">
+									<a style="display: inline-block; text-decoration: none;" href="https://www.texomacuperks.com/">
+										<img v-bind:src="domain+'dist/refer-8.png'" alt="Refer a Friend"
+											style="display: block; width: 115px; height: 40px;" width="115" height="40" />
+									</a>
+								</p>
+							</td>
+
+							<td style="padding-left: 15px;">
+								<p v-if="name" style="font-family: Helvetica, Arial, sans-serif; color: #7a1316; margin: 0; font-size: 18px; white-space: nowrap;">{{name}}</p>
+
+								<p v-if="title" style="font-family: Helvetica, Arial, sans-serif; color: #313131; margin: 0 0 10px; font-size: 10px; white-space: nowrap;">{{title | upperCaseIt}}</p>
+
+								<p v-if="nmls || tccunmls" style="font-family: Helvetica, Arial, sans-serif; color: #313131; margin: 0 0 10px; font-size: 12px; white-space: nowrap;">
+									<span v-if="nmls"><b>NMLS:</b> {{nmls}}</span>
+									<span v-if="nmls && tccunmls" style="color: #7a1316;"> </span>
+									<span v-if="tccunmls"><b>TTCU NMLS:</b> {{tccunmls}}</span>
+								</p>
+
+								<p v-if="cell_phone || direct_phone" style="font-family: Helvetica, Arial, sans-serif; color: #7a1316; margin: 0 0 10px; font-size: 12px; white-space: nowrap;">
+									<a v-if="direct_phone" style="font-family: Helvetica, Arial, sans-serif; text-decoration: none; white-space: nowrap;" v-bind:href="'tel:'+direct_phone"><b>Direct:</b> {{direct_phone | phoneDots}}</a>
+										<span v-if="cell_phone && direct_phone"> | </span>
+									<a v-if="cell_phone" style="font-family: Helvetica, Arial, sans-serif; text-decoration: none; white-space: nowrap;" v-bind:href="'tel:'+cell_phone"><b>Cell:</b> {{cell_phone | phoneDots}}</a>
+								</p>
+
+								<p v-if="show_office_phone || show_fax" style="font-family: Helvetica, Arial, sans-serif; color: #7a1316; margin: 0 0 10px; font-size: 12px; white-space: nowrap;">
+									<a v-if="show_office_phone" style="font-family: Helvetica, Arial, sans-serif; text-decoration: none; white-space: nowrap;"
+										v-bind:href="'tel:'+office_phone"><b>Office:</b> {{office_phone | phoneDots}}</a>
+									<!-- <span v-if="show_office_phone && extension"><br> <span style="color: #313131;">ext: </span>{{extension}}</span> -->
+									
+									<span v-if="show_office_phone && show_fax"> | </span>
+									<span v-if="show_fax"><b>Fax:</b> {{fax | phoneDots}}</span>
+								</p>
+
+								<p v-if="address" style="font-family: Helvetica, Arial, sans-serif; color: #7a1316; margin: 0 0 10px; font-size: 12px; white-space: nowrap;" v-html="address"></p>
+
+								<p style="font-family: Helvetica, Arial, sans-serif; color: #313131; margin: 0 0 10px; font-size: 12px; white-space: nowrap;">
+									<a style="font-family: Helvetica, Arial, sans-serif; color: #313131; margin: 0; font-size: 12px; text-decoration: none; white-space: nowrap;" v-bind:href="'https://'+website">{{website}}</a><span v-if="email" style="color: #7a1316;"> | </span><a v-if="email" style="font-family: Helvetica, Arial, sans-serif; color: #313131; margin: 0; font-size: 12px; text-decoration: none; white-space: nowrap;" v-bind:href="'mailto:'+email">{{email.toLowerCase()}}</a>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<p style="font-size: 10px; margin-top: 15px;">NOTICE: The content of this email is confidential and intended for the recipient specified in this message only. It is strictly forbidden to share any part of this message with any third party, without written consent of the sender. If you received this message by mistake, please reply to this message and follow with its deletion, so that we can ensure such a mistake does not occur in the future.</p>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div v-if="which_office" class="s12 m6 code" v-cloak>
+				<!-- <pre><code class="code-mother"></code></pre> -->
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="dist/main.js?v=1213190232"></script>
+</body>
+</html>

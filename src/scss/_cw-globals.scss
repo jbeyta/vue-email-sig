@@ -1,0 +1,21 @@
+// vendor
+@import "../../node_modules/normalize.css/normalize.css";
+
+// grid
+$bigWidth: 1400px;
+$medWidth: 1024px;
+$smlWidth: 768px;
+$padding: 15px;
+$columns: 12;
+
+// color
+$linkColor: #7a1316;
+$linkHover: lighten($linkColor, 10%);
+$fontColor: #333;
+
+// cw utils
+@import "cw-grid-layout";
+@import "cw-utilities";
+
+@import "cw-inputs";
+@import "cw-letters";

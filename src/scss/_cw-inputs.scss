@@ -1,0 +1,129 @@
+// ::-webkit-input-placeholder {
+//    color: #fff;
+// }
+
+// :-moz-placeholder { /* Firefox 18- */
+//    color: #fff;
+// }
+
+// ::-moz-placeholder {  /* Firefox 19+ */
+//    color: #fff;
+// }
+
+// :-ms-input-placeholder {  
+//    color: #fff;
+// }
+
+$inputBg: #e6e6e6;
+
+input[type="text"],
+input[type="email"],
+input[type="submit"],
+input[type="password"],
+input[type="tel"],
+input[type="button"],
+button,
+select,
+textarea {
+	border: 0;
+	outline: none!important;
+	-webkit-appearance: none;
+
+	.gform_wrapper & {
+		border: 0!important;
+	}
+}
+
+input[type="submit"], input[type="button"], button, .button {
+	display: inline-block;
+	background-color: $linkColor;
+	color: #fff;
+	padding: 10px 20px;
+	transition: .25s;
+	cursor: pointer;
+
+	&.white {
+		background-color: #fff;
+		color: $linkColor;
+	}
+
+	&.small {
+		padding: 5px 10px;
+		font-size: .875em;
+	}
+
+	&:hover {
+		background-color: $linkHover;
+		color: #fff;
+		transition: .25s;
+	}
+}
+
+input[type="file"] {
+
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+textarea,
+select {
+	transition: .25s;
+	padding: 10px;
+	background-color: $inputBg;
+	line-height: 1.3;
+
+	&:hover, &:focus {
+		box-shadow: 0 -2px 0 0 #333 inset;
+		transition: .25s;
+	}
+
+	.gform_wrapper & {
+		padding: 10px!important;
+		line-height: 1.3!important;
+	}
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"], {
+
+}
+
+textarea {
+
+}
+
+select {
+	border-radius: 0;
+	background-image: url(../../src/img/select-down.png);
+	background-position: right 10px center;
+	background-size: 10px 5px;
+	background-repeat: no-repeat;
+	background-color: $inputBg;
+
+	&[multiple="multiple"] {
+		background: none;
+		background-color: $inputBg;
+	}
+
+	&.ui-datepicker-month,
+	&.ui-datepicker-year {
+		background: none;
+		box-shadow: 0 0 0 0 $fontColor;
+
+		&:hover, &:focus {
+			box-shadow: 0 0 0 0 $fontColor;
+		}	
+	}
+}
+
+// @media all and (min-width: $smlWidth) {
+
+// }
+
+// @media all and (min-width: $medWidth) {
+
+// }

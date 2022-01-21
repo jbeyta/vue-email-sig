@@ -1,0 +1,189 @@
+/**
+ * CW Grid
+ * Lightweight, simple, customizable grid. Inspired by Foundation, but made to handle responsive functionality without the bloat.
+ * Version 0.0.1
+ * crane-west.com
+ * Licensed under MIT Open Source
+ */
+
+body {
+	&:before {
+		display: none;
+		content: 'phone';
+	}
+}
+
+.norow {
+	width: 100%;
+	max-width: $bigWidth;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.row {
+	display: flex;
+	max-width: $bigWidth;
+	margin-left: auto;
+	margin-right: auto;
+	flex-wrap: wrap;
+
+	&.ai-center {
+		align-items: center;
+	}
+
+	&.ai-flex-end {
+		align-items: flex-end;
+	}
+
+	&.ai-stretch {
+		align-items: stretch;
+	}
+
+	&.jc-center {
+		justify-content: center;
+	}
+
+	&.jc-space-between {
+		justify-content: space-between;
+	}
+
+	&.jc-flex-end {
+		justify-content: flex-end;
+	}
+
+	&.nowrap {
+		flex-wrap: nowrap;
+	}
+
+	.row {
+		max-width: none;
+		width: auto;
+		margin-left: -$padding;
+		margin-right: -$padding;
+	}
+}
+
+// mobile
+@for $i from 1 through $columns {
+	.s#{$i} {
+		width: $i/$columns*100*1%;
+		padding: 0 $padding;
+	}
+
+	.m#{$i} {
+		padding: 0 $padding;
+	}
+
+	.l#{$i} {
+		padding: 0 $padding;
+	}
+
+	.s-push-#{$i} {
+		position: relative;
+		left: $i/$columns*100*1%;
+	}
+
+	.m-push-#{$i} {
+		position: relative;
+		left: auto;
+	}
+
+	.l-push-#{$i} {
+		position: relative;
+		left: auto;
+	}
+
+	.s-pull-#{$i} {
+		position: relative;
+		left: -$i/$columns*100*1%;
+	}
+
+	.m-pull-#{$i} {
+		position: relative;
+		left: auto;
+	}
+
+	.l-pull-#{$i} {
+		position: relative;
+		left: auto;
+	}
+}
+
+.s-push-0,
+.m-push-0,
+.l-push-0,
+.s-pull-0,
+.m-pull-0,
+.l-pull-0 {
+	left: 0;
+}
+
+.s-hide {
+	display: none;
+}
+
+// medium
+@media all and (min-width: $smlWidth) {
+	body {
+		&:before {
+			content: 'tablet';
+		}
+	}
+
+	@for $i from 1 through $columns {
+		.m#{$i} {
+			width: $i/$columns*100*1%;
+		}
+
+		.m-push-#{$i} {
+			left: $i/$columns*100*1%;
+		}
+
+		.m-pull-#{$i} {
+			left: -$i/$columns*100*1%;
+		}
+	}
+
+	.s-hide {
+		display: block;
+	}
+
+	.m-hide {
+		display: none;
+	}
+}
+
+// large
+@media all and (min-width: $medWidth) {
+	body {
+		&:before {
+			content: 'desktop';
+		}
+	}
+
+	@for $i from 1 through $columns {
+		.l#{$i} {
+			width: $i/$columns*100*1%;
+		}
+
+		.l-push-#{$i} {
+			left: $i/$columns*100*1%;
+		}
+
+		.l-pull-#{$i} {
+			left: -$i/$columns*100*1%;
+		}
+	}
+
+	.s-hide {
+		display: block;
+	}
+
+	.m-hide {
+		display: block;
+	}
+
+	.l-hide {
+		display: none;
+	}
+}
